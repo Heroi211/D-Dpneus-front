@@ -28,6 +28,9 @@
     <div v-if="error" class="alert alert-danger mt-3 text-center">
       {{ error }}
     </div>
+    <footer class="footer-login text-center py-3">
+      <small>© {{ new Date().getFullYear() }} D&D Pneus e lubrificantes</small>
+    </footer>
   </form>
 </template>
 
@@ -54,17 +57,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.form-control {
-  background-color: #3b3b5c;
-  color: #fff;
-  border: none;
-}
-.form-control:focus {
-  background-color: #46466e;
-}
-.btn-success {
-  background-color: var(--green-medium, #025b07);
-  border: none;
-}
-</style>
+ 

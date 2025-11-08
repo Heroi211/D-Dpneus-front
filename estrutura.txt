@@ -1,0 +1,91 @@
+.
+├── CHANGELOG.md
+├── CONTRIBUTING.md
+├── ISSUE_TEMPLATE.md
+├── LICENSE.md
+├── README.md
+├── estrutura.txt
+├── genezio.yaml
+├── intelij.webpack.js
+├── package-lock.json
+├── package.json
+├── public
+│   ├── apple-icon.png
+│   ├── favicon.png
+│   ├── img
+│   │   ├── anime3.png
+│   │   ├── anime6.png
+│   │   ├── apple-icon.png
+│   │   ├── bg5.jpg
+│   │   ├── default-avatar.png
+│   │   ├── emilyz.jpg
+│   │   ├── favicon.png
+│   │   ├── icons
+│   │   ├── img_3115.jpg
+│   │   ├── james.jpg
+│   │   └── mike.jpg
+│   ├── index.html
+│   ├── manifest.json
+│   └── robots.txt
+├── src
+│   ├── App.vue
+│   ├── assets
+│   │   ├── css
+│   │   ├── demo
+│   │   ├── fonts
+│   │   └── sass
+│   ├── components
+│   │   ├── BaseAlert.vue
+│   │   ├── BaseButton.vue
+│   │   ├── BaseCheckbox.vue
+│   │   ├── BaseDropdown.vue
+│   │   ├── BaseNav.vue
+│   │   ├── BaseRadio.vue
+│   │   ├── BaseTable.vue
+│   │   ├── Cards
+│   │   ├── Charts
+│   │   ├── CloseButton.vue
+│   │   ├── Inputs
+│   │   ├── Login
+│   │   ├── Modal.vue
+│   │   ├── NavbarToggleButton.vue
+│   │   ├── NotificationPlugin
+│   │   ├── SidebarPlugin
+│   │   └── index.js
+│   ├── config.js
+│   ├── directives
+│   │   └── click-ouside.js
+│   ├── i18n.js
+│   ├── layout
+│   │   ├── dashboard
+│   │   └── starter
+│   ├── locales
+│   │   ├── ar.json
+│   │   └── en.json
+│   ├── main.js
+│   ├── pages
+│   │   ├── Dashboard
+│   │   ├── Dashboard.vue
+│   │   ├── Icons.vue
+│   │   ├── Login
+│   │   ├── Maps.vue
+│   │   ├── NotFoundPage.vue
+│   │   ├── Notifications
+│   │   ├── Notifications.vue
+│   │   ├── Profile
+│   │   ├── Profile.vue
+│   │   ├── TableList.vue
+│   │   └── Typography.vue
+│   ├── plugins
+│   │   ├── RTLPlugin.js
+│   │   ├── blackDashboard.js
+│   │   ├── globalComponents.js
+│   │   └── globalDirectives.js
+│   ├── registerServiceWorker.js
+│   └── router
+│       ├── index.js
+│       ├── routes.js
+│       └── starterRouter.js
+└── vue.config.js
+
+28 directories, 60 files
