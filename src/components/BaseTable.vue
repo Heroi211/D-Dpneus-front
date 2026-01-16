@@ -12,7 +12,7 @@
         <slot :row="item" :index="index">
           <template v-for="(column, colIndex) in columns">
             <td :key="colIndex" v-if="column.toLowerCase() !== 'ações' && hasValue(item, column)">
-              <span v-if="column.toLowerCase() === 'ativo'" :style="{ color: itemValue(item, column) ? '#4caf50' : '#f44336', fontSize: '18px', fontWeight: 'bold' }">
+              <span v-if="column.toLowerCase() === 'ativo' || column.toLowerCase() === 'concluida'" :style="{ color: itemValue(item, column) ? '#4caf50' : '#f44336', fontSize: '18px', fontWeight: 'bold' }">
                 {{ itemValue(item, column) ? '✓' : '✗' }}
               </span>
               <span v-else>{{ itemValue(item, column) }}</span>

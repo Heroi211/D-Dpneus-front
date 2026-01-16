@@ -24,6 +24,8 @@ const CadastroFornecedores = () =>
   import(/* webpackChunkName: "common" */ "@/pages/CadastroFornecedores.vue");
 const CadastroCategoria = () =>
   import(/* webpackChunkName: "common" */ "@/pages/CadastroCategoria.vue");
+const CadastroTarefas = () =>
+  import(/* webpackChunkName: "common" */ "@/pages/CadastroTarefas.vue");
 const NovaVenda = () =>
   import(/* webpackChunkName: "common" */ "@/pages/NovaVenda.vue");
 const LoginPage = () =>
@@ -94,6 +96,11 @@ const routes = [
         path: "cadastro-categoria",
         name: "cadastro-categoria",
         component: CadastroCategoria,
+      },
+      {
+        path: "cadastro-tarefas",
+        name: "cadastro-tarefas",
+        component: CadastroTarefas,
       },
       {
         path: "nova-venda",

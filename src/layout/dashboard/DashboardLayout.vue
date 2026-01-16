@@ -28,6 +28,11 @@
           icon="tim-icons icon-tag"
         />
         <sidebar-link
+          to="/cadastro-tarefas"
+          :name="$t('sidebar.cadastroTarefas')"
+          icon="tim-icons icon-check-2"
+        />
+        <sidebar-link
           to="/maps"
           :name="$t('sidebar.maps')"
           icon="tim-icons icon-pin"

@@ -6,8 +6,8 @@
     "simpleTable": "Funcionários",
     "totalShipments": "Vendas Totais",
     "chartCategories": ["Accounts", "Purchases", "Sessions"],
-    "tasks": "Tasks({count})",
-    "today": "Today",
+    "tasks": "Tarefas({count})",
+    "today": "HOJE",
     "dropdown": {
       "action": "Action",
       "anotherAction": "Another Action",
@@ -115,6 +115,7 @@
     "cadastroCliente": "Cadastro de Cliente",
     "cadastroEstoque": "Cadastro de Produtos",
     "cadastroFornecedores": "Cadastro de Fornecedores",
-    "cadastroCategoria": "Cadastro de Categoria"
+    "cadastroCategoria": "Cadastro de Categoria",
+    "cadastroTarefas": "Cadastro de Tarefas"
   }
 }

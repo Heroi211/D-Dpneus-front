@@ -3,7 +3,7 @@
     class="navbar navbar-expand-lg navbar-absolute"
     :class="{ 'bg-white': showMenu, 'navbar-transparent': !showMenu }"
   >
-    <div class="container-fluid">
+    <div class="container-fluid" style="position: relative; min-height: 70px;">
       <div class="navbar-wrapper">
         <div
           class="navbar-toggle d-inline"
@@ -20,15 +20,19 @@
             <span class="navbar-toggler-bar bar3"></span>
           </button>
         </div>
-        <router-link to="/nova-venda" class="navbar-brand d-flex align-items-center" style="text-decoration: none; cursor: pointer;">
-          <img 
-            src="/img/D&D_SIDEBAR_GREENJ.png" 
-            alt="Lançar Venda" 
-            style="height: 80px; margin-right: 10px; display: inline-block; vertical-align: middle;"
-          />
-          <span style="color: #fff; font-size: 18px; font-weight: 500; display: inline-block; vertical-align: middle;">Lançar Venda</span>
-        </router-link>
       </div>
+      <router-link 
+        to="/nova-venda" 
+        class="navbar-brand d-flex align-items-center justify-content-center" 
+        style="position: absolute; left: 50%; top: 35%; transform: translate(-50%, -50%); text-decoration: none; cursor: pointer;"
+      >
+        <img 
+          src="/img/D&D_SIDEBAR_GREENJ.png" 
+          alt="Lançar Venda" 
+          style="height: 80px; margin-right: 10px; display: inline-block; vertical-align: middle;"
+        />
+        <span style="color: #fff; font-size: 18px; font-weight: 500; display: inline-block; vertical-align: middle; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Lançar Venda</span>
+      </router-link>
       <button
         class="navbar-toggler"
         type="button"
