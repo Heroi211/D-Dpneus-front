@@ -1,58 +1,6 @@
 <template>
   <div>
     <div class="row">
-      <div class="col-12">
-        <card type="chart">
-          <template slot="header">
-            <div class="row">
-              <div class="col-sm-6" :class="isRTL ? 'text-right' : 'text-left'">
-                <h5 class="card-category">
-                  {{ $t("dashboard.totalShipments") }}
-                </h5>
-                <h2 class="card-title">{{ $t("dashboard.performance") }}</h2>
-              </div>
-              <div class="col-sm-6">
-                <div
-                  class="btn-group btn-group-toggle"
-                  :class="isRTL ? 'float-left' : 'float-right'"
-                  data-toggle="buttons"
-                >
-                  <label
-                    v-for="(option, index) in bigLineChartCategories"
-                    :key="option"
-                    class="btn btn-sm btn-primary btn-simple"
-                    :class="{ active: bigLineChart.activeIndex === index }"
-                    :id="index"
-                  >
-                    <input
-                      type="radio"
-                      @click="initBigChart(index)"
-                      name="options"
-                      autocomplete="off"
-                      :checked="bigLineChart.activeIndex === index"
-                    />
-                    {{ option }}
-                  </label>
-                </div>
-              </div>
-            </div>
-          </template>
-          <div class="chart-area">
-            <line-chart
-              style="height: 100%"
-              ref="bigChart"
-              chart-id="big-line-chart"
-              :chart-data="bigLineChart.chartData"
-              :gradient-colors="bigLineChart.gradientColors"
-              :gradient-stops="bigLineChart.gradientStops"
-              :extra-options="bigLineChart.extraOptions"
-            >
-            </line-chart>
-          </div>
-        </card>
-      </div>
-    </div>
-    <div class="row">
       <div class="col-lg-4" :class="{ 'text-right': isRTL }">
         <card type="chart">
           <template slot="header">
@@ -142,7 +90,7 @@
               }}</a>
             </base-dropdown>
           </template>
-          <div class="table-full-width table-responsive">
+          <div class="table-full-width">
             <task-list></task-list>
           </div>
         </card>
@@ -152,7 +100,7 @@
           <h4 slot="header" class="card-title">
             {{ $t("dashboard.simpleTable") }}
           </h4>
-          <div class="table-responsive">
+          <div>
             <user-table></user-table>
           </div>
         </card>
@@ -350,4 +298,20 @@ export default {
   },
 };
 </script>
-<style></style>
+<style scoped>
+.table-full-width {
+  overflow: hidden;
+  max-height: none;
+}
+
+.table-full-width .table,
+.col-lg-6 .table {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.col-lg-6 .card-body > div {
+  overflow: hidden;
+  max-height: none;
+}
+</style>

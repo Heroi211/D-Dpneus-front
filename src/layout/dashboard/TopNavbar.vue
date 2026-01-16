@@ -20,7 +20,13 @@
             <span class="navbar-toggler-bar bar3"></span>
           </button>
         </div>
-        <a class="navbar-brand" href="#pablo">{{ routeName }}</a>
+        <router-link to="/nova-venda" class="navbar-brand d-flex align-items-center" style="text-decoration: none;">
+          <img 
+            src="/img/D&D_SIDEBAR_GREENJ.png" 
+            alt="Lançar Venda" 
+            style="height: 80px; cursor: pointer;"
+          />
+        </router-link>
       </div>
       <button
         class="navbar-toggler"
@@ -133,7 +139,7 @@
                 <p class="d-lg-none">Log out</p>
               </a>
               <li class="nav-link">
-                <a href="#" class="nav-item dropdown-item">Profile</a>
+                <router-link to="/profile" class="nav-item dropdown-item">Profile</router-link>
               </li>
               <li class="nav-link">
                 <a href="#" class="nav-item dropdown-item">Settings</a>

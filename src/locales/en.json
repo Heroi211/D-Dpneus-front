@@ -1,10 +1,10 @@
 {
   "dashboard": {
-    "completedTasks": "Completed Tasks",
-    "dailySales": "Daily Sales",
+    "completedTasks": "Tarefas Completas",
+    "dailySales": "Vendas Diárias",
     "performance": "Performance",
-    "simpleTable": "Simple Table",
-    "totalShipments": "Total Shipments",
+    "simpleTable": "Funcionários",
+    "totalShipments": "Vendas Totais",
     "chartCategories": ["Accounts", "Purchases", "Sessions"],
     "tasks": "Tasks({count})",
     "today": "Today",
@@ -14,7 +14,7 @@
       "somethingElse": "Something else"
     },
     "usersTable": {
-      "title": "Simple Table",
+      "title": "Funcionários",
       "columns": ["Name", "Country", "City", "Salary"],
       "data": [
         {
@@ -109,7 +109,7 @@
     "maps": "Maps",
     "notifications": "Notifications",
     "userProfile": "User Profile",
-    "tableList": "Table List",
+    "tableList": "Funcionários",
     "typography": "Typography",
     "rtlSupport": "RTL Support"
   }
