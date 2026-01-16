@@ -102,6 +102,7 @@
 import { BaseTable } from "@/components";
 import { tarefasApi, useMocks } from "@/services/api";
 import { mockTarefas } from "@/services/mocks";
+import logger from "@/utils/logger";
 
 export default {
   name: "CadastroTarefas",
@@ -177,7 +178,7 @@ export default {
           const dados = await tarefasApi.getAll();
           this.tarefas = dados || [];
         } catch (error) {
-          console.error("Erro ao carregar tarefas:", error);
+          logger.error("Erro ao carregar tarefas:", error);
           alert("Erro ao carregar tarefas do servidor");
         }
       }

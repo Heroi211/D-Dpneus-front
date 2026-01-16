@@ -99,6 +99,7 @@
 import { BaseTable } from "@/components";
 import { fornecedoresApi, useMocks } from "@/services/api";
 import { mockFornecedores } from "@/services/mocks";
+import logger from "@/utils/logger";
 
 export default {
   name: "CadastroFornecedores",
@@ -174,7 +175,7 @@ export default {
           const dados = await fornecedoresApi.getAll();
           this.fornecedores = dados || [];
         } catch (error) {
-          console.error("Erro ao carregar fornecedores:", error);
+          logger.error("Erro ao carregar fornecedores:", error);
           alert("Erro ao carregar fornecedores do servidor");
         }
       }

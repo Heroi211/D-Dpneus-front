@@ -75,6 +75,7 @@
 import { BaseTable } from "@/components";
 import { categoriasApi, useMocks } from "@/services/api";
 import { mockCategorias } from "@/services/mocks";
+import logger from "@/utils/logger";
 
 export default {
   name: "CadastroCategoria",
@@ -146,7 +147,7 @@ export default {
           const dados = await categoriasApi.getAll();
           this.categorias = dados || [];
         } catch (error) {
-          console.error("Erro ao carregar categorias:", error);
+          logger.error("Erro ao carregar categorias:", error);
           alert("Erro ao carregar categorias do servidor");
         }
       }

@@ -21,6 +21,13 @@ import router from "./router/index";
 import BlackDashboard from "./plugins/blackDashboard";
 import i18n from "./i18n";
 import "./registerServiceWorker";
+import logger from "./utils/logger";
+
+// Teste do logger na inicialização
+logger.log("🚀 Aplicação iniciada - Logger funcionando!");
+logger.debug("VUE_APP_DEBUG:", process.env.VUE_APP_DEBUG);
+logger.debug("VUE_APP_ENVIRONMENT:", process.env.VUE_APP_ENVIRONMENT);
+
 Vue.use(BlackDashboard);
 Vue.use(VueRouter);
 Vue.use(RouterPrefetch);

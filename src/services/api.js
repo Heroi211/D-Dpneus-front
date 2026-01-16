@@ -1,9 +1,13 @@
 const API_BASE_URL = process.env.VUE_APP_API_URL || "http://localhost:3000/api";
-const isLocalEnvironment = process.env.VUE_APP_ENVIRONMENT === "local";
+
+import logger from "@/utils/logger";
 
 // Helper para verificar se deve usar mocks
 export const useMocks = () => {
-  return isLocalEnvironment;
+  const env = process.env.VUE_APP_ENVIRONMENT || "local";
+  const shouldUseMocks = env === "local";
+  logger.debug(`[API] Environment: ${env}, Using Mocks: ${shouldUseMocks}`);
+  return shouldUseMocks;
 };
 
 // Função auxiliar para fazer requisições HTTP (sem axios por enquanto)

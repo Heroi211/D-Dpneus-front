@@ -125,6 +125,7 @@
 import { BaseTable } from "@/components";
 import { clientesApi, useMocks } from "@/services/api";
 import { mockClientes } from "@/services/mocks";
+import logger from "@/utils/logger";
 
 export default {
   name: "CadastroCliente",
@@ -204,7 +205,7 @@ export default {
           const dados = await clientesApi.getAll();
           this.clientes = dados || [];
         } catch (error) {
-          console.error("Erro ao carregar clientes:", error);
+          logger.error("Erro ao carregar clientes:", error);
           alert("Erro ao carregar clientes do servidor");
         }
       }

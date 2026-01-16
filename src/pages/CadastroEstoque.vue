@@ -152,6 +152,7 @@
 import { BaseTable } from "@/components";
 import { produtosApi, useMocks } from "@/services/api";
 import { mockProdutos } from "@/services/mocks";
+import logger from "@/utils/logger";
 
 export default {
   name: "CadastroEstoque",
@@ -247,7 +248,7 @@ export default {
           const dados = await produtosApi.getAll();
           this.produtos = dados || [];
         } catch (error) {
-          console.error("Erro ao carregar produtos:", error);
+          logger.error("Erro ao carregar produtos:", error);
           alert("Erro ao carregar produtos do servidor");
         }
       }
