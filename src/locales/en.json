@@ -109,8 +109,12 @@
     "maps": "Maps",
     "notifications": "Notifications",
     "userProfile": "User Profile",
-    "tableList": "Funcionários",
+    "tableList": "Cadastro de Funcionários",
     "typography": "Typography",
-    "rtlSupport": "RTL Support"
+    "rtlSupport": "RTL Support",
+    "cadastroCliente": "Cadastro de Cliente",
+    "cadastroEstoque": "Cadastro de Produtos",
+    "cadastroFornecedores": "Cadastro de Fornecedores",
+    "cadastroCategoria": "Cadastro de Categoria"
   }
 }

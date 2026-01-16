@@ -3,6 +3,31 @@
     <side-bar>
       <template slot="links">
         <sidebar-link
+          to="/table-list"
+          :name="$t('sidebar.tableList')"
+          icon="tim-icons icon-puzzle-10"
+        />
+        <sidebar-link
+          to="/cadastro-cliente"
+          :name="$t('sidebar.cadastroCliente')"
+          icon="tim-icons icon-single-02"
+        />
+        <sidebar-link
+          to="/cadastro-estoque"
+          :name="$t('sidebar.cadastroEstoque')"
+          icon="tim-icons icon-cart"
+        />
+        <sidebar-link
+          to="/cadastro-fornecedores"
+          :name="$t('sidebar.cadastroFornecedores')"
+          icon="tim-icons icon-delivery-fast"
+        />
+        <sidebar-link
+          to="/cadastro-categoria"
+          :name="$t('sidebar.cadastroCategoria')"
+          icon="tim-icons icon-tag"
+        />
+        <sidebar-link
           to="/maps"
           :name="$t('sidebar.maps')"
           icon="tim-icons icon-pin"
@@ -11,11 +36,6 @@
           to="/notifications"
           :name="$t('sidebar.notifications')"
           icon="tim-icons icon-bell-55"
-        />
-        <sidebar-link
-          to="/table-list"
-          :name="$t('sidebar.tableList')"
-          icon="tim-icons icon-puzzle-10"
         />
       </template>
     </side-bar>

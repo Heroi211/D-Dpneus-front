@@ -20,12 +20,13 @@
             <span class="navbar-toggler-bar bar3"></span>
           </button>
         </div>
-        <router-link to="/nova-venda" class="navbar-brand d-flex align-items-center" style="text-decoration: none;">
+        <router-link to="/nova-venda" class="navbar-brand d-flex align-items-center" style="text-decoration: none; cursor: pointer;">
           <img 
             src="/img/D&D_SIDEBAR_GREENJ.png" 
             alt="Lançar Venda" 
-            style="height: 80px; cursor: pointer;"
+            style="height: 80px; margin-right: 10px; display: inline-block; vertical-align: middle;"
           />
+          <span style="color: #fff; font-size: 18px; font-weight: 500; display: inline-block; vertical-align: middle;">Lançar Venda</span>
         </router-link>
       </div>
       <button

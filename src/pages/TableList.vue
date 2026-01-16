@@ -29,7 +29,7 @@
 </template>
 <script>
 import { BaseTable } from "@/components";
-const tableColumns = ["Name", "Country", "City", "Salary"];
+const tableColumns = ["Name", "Country", "City", "Salary", "Ativo"];
 const tableData = [
   {
     id: 1,
@@ -37,6 +37,7 @@ const tableData = [
     salary: "$36.738",
     country: "Niger",
     city: "Oud-Turnhout",
+    ativo: true,
   },
   {
     id: 2,
@@ -44,6 +45,7 @@ const tableData = [
     salary: "$23,789",
     country: "Curaçao",
     city: "Sinaai-Waas",
+    ativo: true,
   },
   {
     id: 3,
@@ -51,6 +53,7 @@ const tableData = [
     salary: "$56,142",
     country: "Netherlands",
     city: "Baileux",
+    ativo: true,
   },
   {
     id: 4,
@@ -58,6 +61,7 @@ const tableData = [
     salary: "$38,735",
     country: "Korea, South",
     city: "Overland Park",
+    ativo: true,
   },
   {
     id: 5,
@@ -65,6 +69,7 @@ const tableData = [
     salary: "$63,542",
     country: "Malawi",
     city: "Feldkirchen in Kärnten",
+    ativo: true,
   },
   {
     id: 6,
@@ -72,6 +77,7 @@ const tableData = [
     salary: "$98,615",
     country: "Chile",
     city: "Gloucester",
+    ativo: true,
   },
   {
     id: 7,
@@ -79,6 +85,7 @@ const tableData = [
     salary: "$78,615",
     country: "Portugal",
     city: "Gloucester",
+    ativo: true,
   },
 ];
 

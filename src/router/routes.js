@@ -16,6 +16,16 @@ const Typography = () =>
   import(/* webpackChunkName: "common" */ "@/pages/Typography.vue");
 const TableList = () =>
   import(/* webpackChunkName: "common" */ "@/pages/TableList.vue");
+const CadastroCliente = () =>
+  import(/* webpackChunkName: "common" */ "@/pages/CadastroCliente.vue");
+const CadastroEstoque = () =>
+  import(/* webpackChunkName: "common" */ "@/pages/CadastroEstoque.vue");
+const CadastroFornecedores = () =>
+  import(/* webpackChunkName: "common" */ "@/pages/CadastroFornecedores.vue");
+const CadastroCategoria = () =>
+  import(/* webpackChunkName: "common" */ "@/pages/CadastroCategoria.vue");
+const NovaVenda = () =>
+  import(/* webpackChunkName: "common" */ "@/pages/NovaVenda.vue");
 const LoginPage = () =>
   import(/* webpackChunkName: "common" */ "@/pages/Login/LoginPage.vue");
 
@@ -64,6 +74,31 @@ const routes = [
         path: "table-list",
         name: "table-list",
         component: TableList,
+      },
+      {
+        path: "cadastro-cliente",
+        name: "cadastro-cliente",
+        component: CadastroCliente,
+      },
+      {
+        path: "cadastro-estoque",
+        name: "cadastro-estoque",
+        component: CadastroEstoque,
+      },
+      {
+        path: "cadastro-fornecedores",
+        name: "cadastro-fornecedores",
+        component: CadastroFornecedores,
+      },
+      {
+        path: "cadastro-categoria",
+        name: "cadastro-categoria",
+        component: CadastroCategoria,
+      },
+      {
+        path: "nova-venda",
+        name: "nova-venda",
+        component: NovaVenda,
       },
     ],
   },
