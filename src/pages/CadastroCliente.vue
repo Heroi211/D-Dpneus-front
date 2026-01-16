@@ -55,7 +55,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <div class="form-group">
                   <label>Telefone *</label>
                   <input
@@ -67,7 +67,7 @@
                   />
                 </div>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <div class="form-group">
                   <label>Bairro *</label>
                   <input
@@ -79,7 +79,19 @@
                   />
                 </div>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label>Cidade *</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model="cliente.cidade"
+                    placeholder="Digite a cidade"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="col-md-3">
                 <div class="form-group">
                   <label>CPF *</label>
                   <input
@@ -134,7 +146,7 @@ export default {
   },
   data() {
     return {
-      columns: ["Nome", "Sobrenome", "Telefone", "Bairro", "CPF", "Ativo", "Ações"],
+      columns: ["Nome", "Sobrenome", "Telefone", "Bairro", "Cidade", "CPF", "Ativo", "Ações"],
       clientes: [],
       mostrarFormulario: false,
       clienteIndex: null,
@@ -143,6 +155,7 @@ export default {
         sobrenome: "",
         telefone: "",
         bairro: "",
+        cidade: "",
         cpf: "",
         ativo: true,
       },
@@ -210,17 +223,18 @@ export default {
         }
       }
     },
-    limparFormulario() {
-      this.cliente = {
-        nome: "",
-        sobrenome: "",
-        telefone: "",
-        bairro: "",
-        cpf: "",
-        ativo: true,
-      };
-      this.clienteIndex = null;
-    },
+           limparFormulario() {
+             this.cliente = {
+               nome: "",
+               sobrenome: "",
+               telefone: "",
+               bairro: "",
+               cidade: "",
+               cpf: "",
+               ativo: true,
+             };
+             this.clienteIndex = null;
+           },
     cancelar() {
       this.limparFormulario();
       this.mostrarFormulario = false;
