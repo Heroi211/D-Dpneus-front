@@ -12,7 +12,10 @@
         <slot :row="item">
           <template v-for="(column, index) in columns">
             <td :key="index" v-if="hasValue(item, column)">
-              {{ itemValue(item, column) }}
+              <span v-if="column.toLowerCase() === 'ativo'" :style="{ color: itemValue(item, column) ? '#4caf50' : '#f44336', fontSize: '18px', fontWeight: 'bold' }">
+                {{ itemValue(item, column) ? '✓' : '✗' }}
+              </span>
+              <span v-else>{{ itemValue(item, column) }}</span>
             </td>
           </template>
         </slot>
