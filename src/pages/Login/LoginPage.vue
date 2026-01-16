@@ -9,7 +9,7 @@
       <transition name="fade-slide" mode="out-in">
         <div v-if="!showForm" key="logo" @click="revealForm" class="logo-container">
           <img
-            src="/img/logo_ddpneus.png"
+            src="/img/D&D_SIDEBAR_GREENJ.png"
             alt="Logo D&D Pneus"
             class="login-logo"
           />
@@ -18,7 +18,7 @@
 
         <div v-else key="form">
           <img
-            src="/img/logo_ddpneus.png"
+            src="/img/D&D_SIDEBAR_GREENJ.png"
             alt="Logo D&D Pneus"
             class="login-logo-small mb-3"
           />
