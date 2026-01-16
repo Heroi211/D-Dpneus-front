@@ -21,6 +21,8 @@
             :data="produtos"
             :columns="columns"
             thead-classes="text-primary"
+            @edit="editarProduto"
+            @delete="deletarProduto"
           >
           </base-table>
         </div>
@@ -156,9 +158,10 @@ export default {
   },
   data() {
     return {
-      columns: ["Nome", "Categoria", "ValorCompra", "ValorVenda", "Quantidade", "Marca", "Observacao", "Ativo"],
+      columns: ["Nome", "Categoria", "ValorCompra", "ValorVenda", "Quantidade", "Marca", "Observacao", "Ativo", "Ações"],
       produtos: [],
       mostrarFormulario: false,
+      produtoIndex: null,
       estoque: {
         nome: "",
         categoria: "",
@@ -173,21 +176,34 @@ export default {
   },
   methods: {
     salvarEstoque() {
-      const novoProduto = {
-        id: this.produtos.length + 1,
-        nome: this.estoque.nome,
-        categoria: this.estoque.categoria,
-        valorcompra: this.estoque.valorCompra,
-        valorvenda: this.estoque.valorVenda,
-        quantidade: this.estoque.quantidade,
-        marca: this.estoque.marca,
-        observacao: this.estoque.observacao,
-        ativo: this.estoque.ativo,
-      };
-      this.produtos.push(novoProduto);
+      if (this.produtoIndex !== null) {
+        // Editar produto existente
+        this.produtos[this.produtoIndex] = {
+          ...this.estoque,
+          id: this.produtos[this.produtoIndex].id,
+          valorcompra: this.estoque.valorCompra,
+          valorvenda: this.estoque.valorVenda,
+        };
+        alert("Produto atualizado com sucesso!");
+      } else {
+        // Adicionar novo produto
+        const novoProduto = {
+          id: this.produtos.length + 1,
+          nome: this.estoque.nome,
+          categoria: this.estoque.categoria,
+          valorcompra: this.estoque.valorCompra,
+          valorvenda: this.estoque.valorVenda,
+          quantidade: this.estoque.quantidade,
+          marca: this.estoque.marca,
+          observacao: this.estoque.observacao,
+          ativo: this.estoque.ativo,
+        };
+        this.produtos.push(novoProduto);
+        alert("Produto salvo com sucesso!");
+      }
       this.limparFormulario();
       this.mostrarFormulario = false;
-      alert("Produto salvo com sucesso!");
+      this.produtoIndex = null;
     },
     limparFormulario() {
       this.estoque = {
@@ -200,10 +216,31 @@ export default {
         observacao: "",
         ativo: true,
       };
+      this.produtoIndex = null;
     },
     cancelar() {
       this.limparFormulario();
       this.mostrarFormulario = false;
+    },
+    editarProduto(produto, index) {
+      this.estoque = {
+        nome: produto.nome,
+        categoria: produto.categoria,
+        valorCompra: produto.valorcompra,
+        valorVenda: produto.valorvenda,
+        quantidade: produto.quantidade,
+        marca: produto.marca,
+        observacao: produto.observacao,
+        ativo: produto.ativo,
+      };
+      this.mostrarFormulario = true;
+      this.produtoIndex = index;
+    },
+    deletarProduto(produto, index) {
+      if (confirm(`Tem certeza que deseja deletar o produto ${produto.nome}?`)) {
+        this.produtos.splice(index, 1);
+        alert("Produto deletado com sucesso!");
+      }
     },
   },
 };

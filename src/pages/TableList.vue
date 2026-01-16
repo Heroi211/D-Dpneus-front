@@ -20,6 +20,8 @@
             :data="table1.data"
             :columns="table1.columns"
             thead-classes="text-primary"
+            @edit="editarFuncionario"
+            @delete="deletarFuncionario"
           >
           </base-table>
         </div>
@@ -29,7 +31,7 @@
 </template>
 <script>
 import { BaseTable } from "@/components";
-const tableColumns = ["Name", "Country", "City", "Salary", "Ativo"];
+const tableColumns = ["Name", "Country", "City", "Salary", "Ativo", "Ações"];
 const tableData = [
   {
     id: 1,
@@ -101,6 +103,18 @@ export default {
         data: [...tableData],
       },
     };
+  },
+  methods: {
+    editarFuncionario(funcionario, index) {
+      alert(`Editar funcionário: ${funcionario.name}`);
+      // Aqui você pode implementar a lógica de edição
+    },
+    deletarFuncionario(funcionario, index) {
+      if (confirm(`Tem certeza que deseja deletar o funcionário ${funcionario.name}?`)) {
+        this.table1.data.splice(index, 1);
+        alert("Funcionário deletado com sucesso!");
+      }
+    },
   },
 };
 </script>

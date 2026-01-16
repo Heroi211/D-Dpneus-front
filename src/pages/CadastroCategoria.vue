@@ -21,6 +21,8 @@
             :data="categorias"
             :columns="columns"
             thead-classes="text-primary"
+            @edit="editarCategoria"
+            @delete="deletarCategoria"
           >
           </base-table>
         </div>
@@ -79,9 +81,10 @@ export default {
   },
   data() {
     return {
-      columns: ["Nome", "Ativo"],
+      columns: ["Nome", "Ativo", "Ações"],
       categorias: [],
       mostrarFormulario: false,
+      categoriaIndex: null,
       categoria: {
         nome: "",
         ativo: true,
@@ -90,25 +93,48 @@ export default {
   },
   methods: {
     salvarCategoria() {
-      const novaCategoria = {
-        id: this.categorias.length + 1,
-        nome: this.categoria.nome,
-        ativo: this.categoria.ativo,
-      };
-      this.categorias.push(novaCategoria);
+      if (this.categoriaIndex !== null) {
+        // Editar categoria existente
+        this.categorias[this.categoriaIndex] = {
+          ...this.categoria,
+          id: this.categorias[this.categoriaIndex].id,
+        };
+        alert("Categoria atualizada com sucesso!");
+      } else {
+        // Adicionar nova categoria
+        const novaCategoria = {
+          id: this.categorias.length + 1,
+          nome: this.categoria.nome,
+          ativo: this.categoria.ativo,
+        };
+        this.categorias.push(novaCategoria);
+        alert("Categoria salva com sucesso!");
+      }
       this.limparFormulario();
       this.mostrarFormulario = false;
-      alert("Categoria salva com sucesso!");
+      this.categoriaIndex = null;
     },
     limparFormulario() {
       this.categoria = {
         nome: "",
         ativo: true,
       };
+      this.categoriaIndex = null;
     },
     cancelar() {
       this.limparFormulario();
       this.mostrarFormulario = false;
+    },
+    editarCategoria(categoria, index) {
+      this.categoria = { ...categoria };
+      this.mostrarFormulario = true;
+      this.categoriaIndex = index;
+    },
+    deletarCategoria(categoria, index) {
+      if (confirm(`Tem certeza que deseja deletar a categoria ${categoria.nome}?`)) {
+        this.categorias.splice(index, 1);
+        alert("Categoria deletada com sucesso!");
+      }
     },
   },
 };

@@ -21,6 +21,8 @@
             :data="clientes"
             :columns="columns"
             thead-classes="text-primary"
+            @edit="editarCliente"
+            @delete="deletarCliente"
           >
           </base-table>
         </div>
@@ -117,9 +119,10 @@ export default {
   },
   data() {
     return {
-      columns: ["Nome", "Sobrenome", "Telefone", "Bairro", "Ativo"],
+      columns: ["Nome", "Sobrenome", "Telefone", "Bairro", "Ativo", "Ações"],
       clientes: [],
       mostrarFormulario: false,
+      clienteIndex: null,
       cliente: {
         nome: "",
         sobrenome: "",
@@ -131,18 +134,29 @@ export default {
   },
   methods: {
     salvarCliente() {
-      const novoCliente = {
-        id: this.clientes.length + 1,
-        nome: this.cliente.nome,
-        sobrenome: this.cliente.sobrenome,
-        telefone: this.cliente.telefone,
-        bairro: this.cliente.bairro,
-        ativo: this.cliente.ativo,
-      };
-      this.clientes.push(novoCliente);
+      if (this.clienteIndex !== null) {
+        // Editar cliente existente
+        this.clientes[this.clienteIndex] = {
+          ...this.cliente,
+          id: this.clientes[this.clienteIndex].id,
+        };
+        alert("Cliente atualizado com sucesso!");
+      } else {
+        // Adicionar novo cliente
+        const novoCliente = {
+          id: this.clientes.length + 1,
+          nome: this.cliente.nome,
+          sobrenome: this.cliente.sobrenome,
+          telefone: this.cliente.telefone,
+          bairro: this.cliente.bairro,
+          ativo: this.cliente.ativo,
+        };
+        this.clientes.push(novoCliente);
+        alert("Cliente salvo com sucesso!");
+      }
       this.limparFormulario();
       this.mostrarFormulario = false;
-      alert("Cliente salvo com sucesso!");
+      this.clienteIndex = null;
     },
     limparFormulario() {
       this.cliente = {
@@ -152,10 +166,22 @@ export default {
         bairro: "",
         ativo: true,
       };
+      this.clienteIndex = null;
     },
     cancelar() {
       this.limparFormulario();
       this.mostrarFormulario = false;
+    },
+    editarCliente(cliente, index) {
+      this.cliente = { ...cliente };
+      this.mostrarFormulario = true;
+      this.clienteIndex = index;
+    },
+    deletarCliente(cliente, index) {
+      if (confirm(`Tem certeza que deseja deletar o cliente ${cliente.nome} ${cliente.sobrenome}?`)) {
+        this.clientes.splice(index, 1);
+        alert("Cliente deletado com sucesso!");
+      }
     },
   },
 };

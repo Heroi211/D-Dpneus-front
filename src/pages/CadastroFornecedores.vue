@@ -21,6 +21,8 @@
             :data="fornecedores"
             :columns="columns"
             thead-classes="text-primary"
+            @edit="editarFornecedor"
+            @delete="deletarFornecedor"
           >
           </base-table>
         </div>
@@ -103,9 +105,10 @@ export default {
   },
   data() {
     return {
-      columns: ["CNPJ", "Nome", "Tipo", "Ativo"],
+      columns: ["CNPJ", "Nome", "Tipo", "Ativo", "Ações"],
       fornecedores: [],
       mostrarFormulario: false,
+      fornecedorIndex: null,
       fornecedor: {
         cnpj: "",
         nome: "",
@@ -116,17 +119,28 @@ export default {
   },
   methods: {
     salvarFornecedor() {
-      const novoFornecedor = {
-        id: this.fornecedores.length + 1,
-        cnpj: this.fornecedor.cnpj,
-        nome: this.fornecedor.nome,
-        tipo: this.fornecedor.tipo,
-        ativo: this.fornecedor.ativo,
-      };
-      this.fornecedores.push(novoFornecedor);
+      if (this.fornecedorIndex !== null) {
+        // Editar fornecedor existente
+        this.fornecedores[this.fornecedorIndex] = {
+          ...this.fornecedor,
+          id: this.fornecedores[this.fornecedorIndex].id,
+        };
+        alert("Fornecedor atualizado com sucesso!");
+      } else {
+        // Adicionar novo fornecedor
+        const novoFornecedor = {
+          id: this.fornecedores.length + 1,
+          cnpj: this.fornecedor.cnpj,
+          nome: this.fornecedor.nome,
+          tipo: this.fornecedor.tipo,
+          ativo: this.fornecedor.ativo,
+        };
+        this.fornecedores.push(novoFornecedor);
+        alert("Fornecedor salvo com sucesso!");
+      }
       this.limparFormulario();
       this.mostrarFormulario = false;
-      alert("Fornecedor salvo com sucesso!");
+      this.fornecedorIndex = null;
     },
     limparFormulario() {
       this.fornecedor = {
@@ -135,10 +149,22 @@ export default {
         tipo: "",
         ativo: true,
       };
+      this.fornecedorIndex = null;
     },
     cancelar() {
       this.limparFormulario();
       this.mostrarFormulario = false;
+    },
+    editarFornecedor(fornecedor, index) {
+      this.fornecedor = { ...fornecedor };
+      this.mostrarFormulario = true;
+      this.fornecedorIndex = index;
+    },
+    deletarFornecedor(fornecedor, index) {
+      if (confirm(`Tem certeza que deseja deletar o fornecedor ${fornecedor.nome}?`)) {
+        this.fornecedores.splice(index, 1);
+        alert("Fornecedor deletado com sucesso!");
+      }
     },
   },
 };
