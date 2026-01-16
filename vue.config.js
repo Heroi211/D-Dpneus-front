@@ -2,6 +2,9 @@ const webpack = require("webpack");
 
 module.exports = {
   lintOnSave: false,
+  devServer: {
+    port: process.env.VUE_APP_PORT || 8080,
+  },
   configureWebpack: {
     // Set up all the aliases we use in our app.
     resolve: {

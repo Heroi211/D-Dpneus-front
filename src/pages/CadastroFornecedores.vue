@@ -97,6 +97,8 @@
 
 <script>
 import { BaseTable } from "@/components";
+import { fornecedoresApi, useMocks } from "@/services/api";
+import { mockFornecedores } from "@/services/mocks";
 
 export default {
   name: "CadastroFornecedores",
@@ -118,29 +120,64 @@ export default {
     };
   },
   methods: {
-    salvarFornecedor() {
+    async salvarFornecedor() {
       if (this.fornecedorIndex !== null) {
         // Editar fornecedor existente
-        this.fornecedores[this.fornecedorIndex] = {
-          ...this.fornecedor,
-          id: this.fornecedores[this.fornecedorIndex].id,
-        };
-        alert("Fornecedor atualizado com sucesso!");
+        if (useMocks()) {
+          this.fornecedores[this.fornecedorIndex] = {
+            ...this.fornecedor,
+            id: this.fornecedores[this.fornecedorIndex].id,
+          };
+          alert("Fornecedor atualizado com sucesso!");
+        } else {
+          try {
+            await fornecedoresApi.update(this.fornecedores[this.fornecedorIndex].id, this.fornecedor);
+            await this.carregarFornecedores();
+            alert("Fornecedor atualizado com sucesso!");
+          } catch (error) {
+            alert("Erro ao atualizar fornecedor: " + error.message);
+            return;
+          }
+        }
       } else {
         // Adicionar novo fornecedor
-        const novoFornecedor = {
-          id: this.fornecedores.length + 1,
-          cnpj: this.fornecedor.cnpj,
-          nome: this.fornecedor.nome,
-          tipo: this.fornecedor.tipo,
-          ativo: this.fornecedor.ativo,
-        };
-        this.fornecedores.push(novoFornecedor);
-        alert("Fornecedor salvo com sucesso!");
+        if (useMocks()) {
+          const novoFornecedor = {
+            id: this.fornecedores.length + 1,
+            cnpj: this.fornecedor.cnpj,
+            nome: this.fornecedor.nome,
+            tipo: this.fornecedor.tipo,
+            ativo: this.fornecedor.ativo,
+          };
+          this.fornecedores.push(novoFornecedor);
+          alert("Fornecedor salvo com sucesso!");
+        } else {
+          try {
+            await fornecedoresApi.create(this.fornecedor);
+            await this.carregarFornecedores();
+            alert("Fornecedor salvo com sucesso!");
+          } catch (error) {
+            alert("Erro ao salvar fornecedor: " + error.message);
+            return;
+          }
+        }
       }
       this.limparFormulario();
       this.mostrarFormulario = false;
       this.fornecedorIndex = null;
+    },
+    async carregarFornecedores() {
+      if (useMocks()) {
+        this.fornecedores = [...mockFornecedores];
+      } else {
+        try {
+          const dados = await fornecedoresApi.getAll();
+          this.fornecedores = dados || [];
+        } catch (error) {
+          console.error("Erro ao carregar fornecedores:", error);
+          alert("Erro ao carregar fornecedores do servidor");
+        }
+      }
     },
     limparFormulario() {
       this.fornecedor = {
@@ -160,12 +197,25 @@ export default {
       this.mostrarFormulario = true;
       this.fornecedorIndex = index;
     },
-    deletarFornecedor(fornecedor, index) {
+    async deletarFornecedor(fornecedor, index) {
       if (confirm(`Tem certeza que deseja deletar o fornecedor ${fornecedor.nome}?`)) {
-        this.fornecedores.splice(index, 1);
-        alert("Fornecedor deletado com sucesso!");
+        if (useMocks()) {
+          this.fornecedores.splice(index, 1);
+          alert("Fornecedor deletado com sucesso!");
+        } else {
+          try {
+            await fornecedoresApi.delete(fornecedor.id);
+            await this.carregarFornecedores();
+            alert("Fornecedor deletado com sucesso!");
+          } catch (error) {
+            alert("Erro ao deletar fornecedor: " + error.message);
+          }
+        }
       }
     },
+  },
+  async mounted() {
+    await this.carregarFornecedores();
   },
 };
 </script>

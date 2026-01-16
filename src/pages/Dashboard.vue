@@ -27,7 +27,7 @@
           <template slot="header">
             <h5 class="card-category">{{ $t("dashboard.dailySales") }}</h5>
             <h3 class="card-title">
-              <i class="tim-icons icon-delivery-fast text-info"></i> 3,500€
+              <i class="tim-icons icon-delivery-fast text-info"></i> R$ 3.500
             </h3>
           </template>
           <div class="chart-area">
@@ -59,23 +59,6 @@
               :extra-options="greenLineChart.extraOptions"
             >
             </line-chart>
-          </div>
-        </card>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12">
-        <card :header-classes="{ 'text-right': isRTL }">
-          <h4 slot="header" class="card-title">
-            Vendas Realizadas
-          </h4>
-          <div>
-            <base-table
-              :data="vendas"
-              :columns="vendasColumns"
-              thead-classes="text-primary"
-            >
-            </base-table>
           </div>
         </card>
       </div>
@@ -131,7 +114,6 @@ import BarChart from "@/components/Charts/BarChart";
 import * as chartConfigs from "@/components/Charts/config";
 import TaskList from "./Dashboard/TaskList";
 import UserTable from "./Dashboard/UserTable";
-import { BaseTable } from "@/components";
 import config from "@/config";
 
 export default {
@@ -140,58 +122,9 @@ export default {
     BarChart,
     TaskList,
     UserTable,
-    BaseTable,
   },
   data() {
     return {
-      vendasColumns: ["Cliente", "Produto", "Quantidade", "ValorUnitario", "ValorTotal", "Data"],
-      vendas: [
-        {
-          id: 1,
-          cliente: "João Silva",
-          produto: "Pneu Aro 14",
-          quantidade: 4,
-          valorunitario: "R$ 250,00",
-          valortotal: "R$ 1.000,00",
-          data: "15/01/2024",
-        },
-        {
-          id: 2,
-          cliente: "Maria Santos",
-          produto: "Óleo Motor",
-          quantidade: 2,
-          valorunitario: "R$ 45,00",
-          valortotal: "R$ 90,00",
-          data: "16/01/2024",
-        },
-        {
-          id: 3,
-          cliente: "Pedro Costa",
-          produto: "Pneu Aro 15",
-          quantidade: 2,
-          valorunitario: "R$ 350,00",
-          valortotal: "R$ 700,00",
-          data: "17/01/2024",
-        },
-        {
-          id: 4,
-          cliente: "Ana Oliveira",
-          produto: "Filtro de Ar",
-          quantidade: 1,
-          valorunitario: "R$ 35,00",
-          valortotal: "R$ 35,00",
-          data: "18/01/2024",
-        },
-        {
-          id: 5,
-          cliente: "Carlos Souza",
-          produto: "Pneu Aro 13",
-          quantidade: 4,
-          valorunitario: "R$ 220,00",
-          valortotal: "R$ 880,00",
-          data: "19/01/2024",
-        },
-      ],
       bigLineChart: {
         allData: [
           [100, 70, 90, 70, 85, 60, 75, 60, 90, 80, 110, 100],

@@ -73,6 +73,8 @@
 
 <script>
 import { BaseTable } from "@/components";
+import { categoriasApi, useMocks } from "@/services/api";
+import { mockCategorias } from "@/services/mocks";
 
 export default {
   name: "CadastroCategoria",
@@ -92,27 +94,62 @@ export default {
     };
   },
   methods: {
-    salvarCategoria() {
+    async salvarCategoria() {
       if (this.categoriaIndex !== null) {
         // Editar categoria existente
-        this.categorias[this.categoriaIndex] = {
-          ...this.categoria,
-          id: this.categorias[this.categoriaIndex].id,
-        };
-        alert("Categoria atualizada com sucesso!");
+        if (useMocks()) {
+          this.categorias[this.categoriaIndex] = {
+            ...this.categoria,
+            id: this.categorias[this.categoriaIndex].id,
+          };
+          alert("Categoria atualizada com sucesso!");
+        } else {
+          try {
+            await categoriasApi.update(this.categorias[this.categoriaIndex].id, this.categoria);
+            await this.carregarCategorias();
+            alert("Categoria atualizada com sucesso!");
+          } catch (error) {
+            alert("Erro ao atualizar categoria: " + error.message);
+            return;
+          }
+        }
       } else {
         // Adicionar nova categoria
-        const novaCategoria = {
-          id: this.categorias.length + 1,
-          nome: this.categoria.nome,
-          ativo: this.categoria.ativo,
-        };
-        this.categorias.push(novaCategoria);
-        alert("Categoria salva com sucesso!");
+        if (useMocks()) {
+          const novaCategoria = {
+            id: this.categorias.length + 1,
+            nome: this.categoria.nome,
+            ativo: this.categoria.ativo,
+          };
+          this.categorias.push(novaCategoria);
+          alert("Categoria salva com sucesso!");
+        } else {
+          try {
+            await categoriasApi.create(this.categoria);
+            await this.carregarCategorias();
+            alert("Categoria salva com sucesso!");
+          } catch (error) {
+            alert("Erro ao salvar categoria: " + error.message);
+            return;
+          }
+        }
       }
       this.limparFormulario();
       this.mostrarFormulario = false;
       this.categoriaIndex = null;
+    },
+    async carregarCategorias() {
+      if (useMocks()) {
+        this.categorias = [...mockCategorias];
+      } else {
+        try {
+          const dados = await categoriasApi.getAll();
+          this.categorias = dados || [];
+        } catch (error) {
+          console.error("Erro ao carregar categorias:", error);
+          alert("Erro ao carregar categorias do servidor");
+        }
+      }
     },
     limparFormulario() {
       this.categoria = {
@@ -130,12 +167,25 @@ export default {
       this.mostrarFormulario = true;
       this.categoriaIndex = index;
     },
-    deletarCategoria(categoria, index) {
+    async deletarCategoria(categoria, index) {
       if (confirm(`Tem certeza que deseja deletar a categoria ${categoria.nome}?`)) {
-        this.categorias.splice(index, 1);
-        alert("Categoria deletada com sucesso!");
+        if (useMocks()) {
+          this.categorias.splice(index, 1);
+          alert("Categoria deletada com sucesso!");
+        } else {
+          try {
+            await categoriasApi.delete(categoria.id);
+            await this.carregarCategorias();
+            alert("Categoria deletada com sucesso!");
+          } catch (error) {
+            alert("Erro ao deletar categoria: " + error.message);
+          }
+        }
       }
     },
+  },
+  async mounted() {
+    await this.carregarCategorias();
   },
 };
 </script>

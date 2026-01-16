@@ -150,6 +150,8 @@
 
 <script>
 import { BaseTable } from "@/components";
+import { produtosApi, useMocks } from "@/services/api";
+import { mockProdutos } from "@/services/mocks";
 
 export default {
   name: "CadastroEstoque",
@@ -175,35 +177,80 @@ export default {
     };
   },
   methods: {
-    salvarEstoque() {
+    async salvarEstoque() {
       if (this.produtoIndex !== null) {
         // Editar produto existente
-        this.produtos[this.produtoIndex] = {
-          ...this.estoque,
-          id: this.produtos[this.produtoIndex].id,
-          valorcompra: this.estoque.valorCompra,
-          valorvenda: this.estoque.valorVenda,
-        };
-        alert("Produto atualizado com sucesso!");
+        if (useMocks()) {
+          this.produtos[this.produtoIndex] = {
+            ...this.estoque,
+            id: this.produtos[this.produtoIndex].id,
+            valorcompra: this.estoque.valorCompra,
+            valorvenda: this.estoque.valorVenda,
+          };
+          alert("Produto atualizado com sucesso!");
+        } else {
+          try {
+            const produtoData = {
+              ...this.estoque,
+              valorcompra: this.estoque.valorCompra,
+              valorvenda: this.estoque.valorVenda,
+            };
+            await produtosApi.update(this.produtos[this.produtoIndex].id, produtoData);
+            await this.carregarProdutos();
+            alert("Produto atualizado com sucesso!");
+          } catch (error) {
+            alert("Erro ao atualizar produto: " + error.message);
+            return;
+          }
+        }
       } else {
         // Adicionar novo produto
-        const novoProduto = {
-          id: this.produtos.length + 1,
-          nome: this.estoque.nome,
-          categoria: this.estoque.categoria,
-          valorcompra: this.estoque.valorCompra,
-          valorvenda: this.estoque.valorVenda,
-          quantidade: this.estoque.quantidade,
-          marca: this.estoque.marca,
-          observacao: this.estoque.observacao,
-          ativo: this.estoque.ativo,
-        };
-        this.produtos.push(novoProduto);
-        alert("Produto salvo com sucesso!");
+        if (useMocks()) {
+          const novoProduto = {
+            id: this.produtos.length + 1,
+            nome: this.estoque.nome,
+            categoria: this.estoque.categoria,
+            valorcompra: this.estoque.valorCompra,
+            valorvenda: this.estoque.valorVenda,
+            quantidade: this.estoque.quantidade,
+            marca: this.estoque.marca,
+            observacao: this.estoque.observacao,
+            ativo: this.estoque.ativo,
+          };
+          this.produtos.push(novoProduto);
+          alert("Produto salvo com sucesso!");
+        } else {
+          try {
+            const produtoData = {
+              ...this.estoque,
+              valorcompra: this.estoque.valorCompra,
+              valorvenda: this.estoque.valorVenda,
+            };
+            await produtosApi.create(produtoData);
+            await this.carregarProdutos();
+            alert("Produto salvo com sucesso!");
+          } catch (error) {
+            alert("Erro ao salvar produto: " + error.message);
+            return;
+          }
+        }
       }
       this.limparFormulario();
       this.mostrarFormulario = false;
       this.produtoIndex = null;
+    },
+    async carregarProdutos() {
+      if (useMocks()) {
+        this.produtos = [...mockProdutos];
+      } else {
+        try {
+          const dados = await produtosApi.getAll();
+          this.produtos = dados || [];
+        } catch (error) {
+          console.error("Erro ao carregar produtos:", error);
+          alert("Erro ao carregar produtos do servidor");
+        }
+      }
     },
     limparFormulario() {
       this.estoque = {
@@ -236,12 +283,25 @@ export default {
       this.mostrarFormulario = true;
       this.produtoIndex = index;
     },
-    deletarProduto(produto, index) {
+    async deletarProduto(produto, index) {
       if (confirm(`Tem certeza que deseja deletar o produto ${produto.nome}?`)) {
-        this.produtos.splice(index, 1);
-        alert("Produto deletado com sucesso!");
+        if (useMocks()) {
+          this.produtos.splice(index, 1);
+          alert("Produto deletado com sucesso!");
+        } else {
+          try {
+            await produtosApi.delete(produto.id);
+            await this.carregarProdutos();
+            alert("Produto deletado com sucesso!");
+          } catch (error) {
+            alert("Erro ao deletar produto: " + error.message);
+          }
+        }
       }
     },
+  },
+  async mounted() {
+    await this.carregarProdutos();
   },
 };
 </script>
